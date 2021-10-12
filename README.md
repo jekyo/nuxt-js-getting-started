@@ -1,59 +1,127 @@
-# nuxt-js-getting-started
-A boilerplate SSR application using [Nuxt.js](https://nuxtjs.org/)
+# Tutorial: Deploying a basic Nuxt app on Jekyo
 
-## Setup
-Make sure you have [Node.js](nodejs.org) installed
-### Install jekyo
-```bash
-npm install -g jekyo
+### Prerequisites
+
+Make sure you have [NodeJS](https://nodejs.org/en/download/), [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) and [git](https://github.com/git-guides/install-git) installed.
+
+If it's your first time using **Jekyo**, you can **install** it by running the following command in your terminal:
+
+`npm install -g jekyo`
+
+### Sign in to Jekyo
+
+You can sign in to Jekyo by running `jekyo user:signin`
+
 ```
-### Sign In
-Use the `jekyo user:signin` or `jekyo signin` to the Jekyo CLI
-```bash
 ➜  ~ jekyo user:signin 
 Your email?: **************
 Your password?: **********
 You have successfully signed in!
 ```
-## Prepare your application
-```bash
-git clone https://github.com/jekyo/nuxt-js-getting-started
-cd nuxt-js-getting-started
+If you don't have a Jekyo account, you can create one in the terminal by running `jekyo user:signup`. 
+
+## 1. Create a basic Nuxt app
+
+You can start your Nuxt project by using `jekyo create`
+
+Using the **arrows** on your keyboard, select **nuxt** and press **enter**.  
 ```
-## Deploy your application
-Create an application on Jekyo, which deploys your source code.
-```bash
-➜  ~ jekyo service:create
-Service name?: nuxt-js-getting-started
-service created!
+? Select template
+  None Creates only the application    
+❯ nuxt-js A basic starter app using [Nuxt.js](https://nuxtjs.org/) 
+```
+When prompted, enter the desired name for your Nuxt app. 
+
+`Application name?: nuxt-tutorial`
+
+This will create a basic nuxt app in the current directory by cloning this [nuxt starter app](https://github.com/jekyo/nuxt-getting-started) repository.
 
 ```
-Now deploy your application:
+Cloning source code... OK
+Application created!
 ```
-➜  jekyo deploy               
-Enumerating objects: 32, done.
-Counting objects: 100% (32/32), done.
-Delta compression using up to 32 threads
-Compressing objects: 100% (25/25), done.
-Writing objects: 100% (32/32), 163.87 KiB | 11.71 MiB/s, done.
-Total 32 (delta 0), reused 0 (delta 0), pack-reused 0
-remote: Debugger listening on ws://127.0.0.1:35565/e856ecd4-42ee-4e73-91ac-d99c733fd1a9
-remote: For help, see: https://nodejs.org/en/docs/inspector
-remote: Debugger attached.
-remote: =============================================
-remote: 👋 - Hello, x4139
-remote: 🚀 - Launching getting-started onto the jekyo platform !
-remote: =============================================
-remote: 🔨 - Fetching source code for getting-started
-remote: ------ Done.
-remote: 🔨 - Building container for getting-started service. 🕐 This might take a while !
-remote: ------ Done.
-remote: 🔨 - Pushing container for getting-started service into the registry. 🕐 This might take a while !
-remote: ------ Done.
-remote: 🚀 - Deploying getting-started service on jekyo.
-remote: =============================================
-remote: 🎉 Deployment success !. Visit your app on: https://getting-started.jekyo.app
-remote: Waiting for the debugger to disconnect...
-To http://localhost:8000/api/repository/x4139/getting-started.git
- * [new branch]      master -> master
+
+### Deploy the Nuxt app on Jekyo
+
+To deploy the app, first navigate to the newly created directory:
+
+`cd nuxt-tutorial`
+
+Now you can deploy this app to Jekyo by running: 
+
+`jekyo deploy`
+
+After a while, you should see something like this:
+
 ```
+➜  Fetching source code ... OK
+➜  Building application, this might take a while ... OK
+➜  Publishing application, this might take a while  ... OK
+➜  Deploying application ... OK        
+➜  Waiting for application to start ... OK
+➜  Visit your app on: https://nuxt-tutorial.jekyo.app ... OK
+```
+
+You can now browse to your Nuxt app on https://nuxt-tutorial.jekyo.app (replace 'nuxt-tutorial' with your app name)
+
+## 2. Deploying an existing Nuxt app
+
+Navigate to your local nuxt app directory
+
+`cd my-nuxt-app`
+
+Initialize a git repository if you haven't already done so by running `git init`. 
+
+Create an empty Jekyo app:
+
+`jekyo create` 
+
+Select 'none' using the **arrows** on your keyboard and press **enter**. This will create an app using your current directory. 
+
+```
+? Select template (Use arrow keys)
+❯ None Creates an application from your current directory
+```
+
+Name your app: 
+
+`Application name?: my-nuxt-app`
+
+Run `jekyo link` to link your local app to the remote Jekyo app. Select 'my-nuxt-app' using the **arrows** on your keyboard and press **enter**.
+
+```
+? Select application (Use arrow keys)
+❯ my-nuxt-app
+```
+Now you can deploy this app to Jekyo by running: 
+
+`jekyo deploy`
+
+After a while, you should see something like this:
+
+```
+➜  Fetching source code ... OK
+➜  Building application, this might take a while ... OK
+➜  Publishing application, this might take a while  ... OK
+➜  Deploying application ... OK        
+➜  Waiting for application to start ... OK
+➜  Visit your app on: https://my-nuxt-app.jekyo.app ... OK
+```
+
+You can now browse to your nuxt app on https://my-nuxt-app.jekyo.app (replace 'my-nuxt-app' with your app name)
+
+## Pushing local changes to Jekyo 
+
+Add the newly modified file(s) to the git index by using [git add](https://www.atlassian.com/git/tutorials/saving-changes)
+
+`git add`
+
+Create a [git commit](https://github.com/git-guides/git-commit)
+
+`git commit -m "your commit message"`
+
+Now, simply deploy your app again:
+
+`jekyo deploy`
+
+You will see your changes on your live app after a short while. 
